@@ -1,24 +1,116 @@
+# This .gitignore file should be placed at the root of your Unity project directory
+#
+# Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
+
+# =============== #
+# Unity generated #
+# =============== #
+Temp/
 [Ll]ibrary/
-[Tt]emp/
-[Oo]bj/
 [Bb]uild/
 [Bb]uilds/
-[Ll]ogs/
-[Mm]emoryCaptures/
+Assets/AssetStoreTools*
 
-# Visual Studio / Rider
-.vs/
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+ExportedObj/
 *.csproj
+*.unityproj
 *.sln
+*.suo
+*.tmp
 *.user
 *.userprefs
 *.pidb
 *.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
 
-# OS
+# ============================== #
+# Visual Studio Code / JetBrains #
+# ============================== #
+.vscode/
+.idea/
+
+# ================== #
+# OS generated files #
+# ================== #
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
+*.swp
+*.swo
 
-# Arduino
-.arduinoIDE/
-*.ino
+# ================ #
+# Unity3D specific #
+# ================ #
+[Ll]ogs/
+[Mm]emoryCaptures/
+[Cc]rashlytics/
+
+# ================== #
+# Build specific     #
+# ================== #
+*.apk
+*.aab
+*.app
+*.exe
+*.unitypackage
+
+# ================== #
+# Android specific   #
+# ================== #
+*.keystore
+*.jks
+
+# ================== #
+# iOS specific       #
+# ================== #
+[xX]code/
+*.ipa
+*.dSYM/
+*.framework
+*.xcworkspace
+xcuserdata/
+
+# ================== #
+# Cloud Build        #
+# ================== #
+[Uu]nity[Pp]roject[Pp]ool/
+
+# ================== #
+# Rider              #
+# ================== #
+.idea/
+*.sln.iml
+
+# ================== #
+# JetBrains Rider    #
+# ================== #
+**/.idea/
+
+# ================== #
+# Visual Studio Code #
+# ================== #
+.vscode/
+*.code-workspace
+
+# ================== #
+# Test files         #
+# ================== #
+*.test
+*.tests
+TestResults/
+
+# ================== #
+# Profiler data      #
+# ================== #
+[Pp]rofiler/[Ll]ogs/
