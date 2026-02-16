@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7598609648262038768
+--- !u!1 &6123127403536826723
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6114201785890962440}
-  - component: {fileID: 5289731243004727059}
-  - component: {fileID: 1502737906956407813}
-  - component: {fileID: 1221739858614093175}
-  - component: {fileID: -6272699666340784696}
+  - component: {fileID: 6568060957834621313}
+  - component: {fileID: 5154294404960035897}
+  - component: {fileID: 839582268949116780}
+  - component: {fileID: 7947668832817866669}
+  - component: {fileID: 6470348127225528789}
   m_Layer: 0
-  m_Name: Duplicator_Original
+  m_Name: Flickerer_Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6114201785890962440
+--- !u!4 &6568060957834621313
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7598609648262038768}
+  m_GameObject: {fileID: 6123127403536826723}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2, y: 1, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: 1, y: 2, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &5289731243004727059
+--- !u!33 &5154294404960035897
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7598609648262038768}
+  m_GameObject: {fileID: 6123127403536826723}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &1502737906956407813
+--- !u!23 &839582268949116780
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7598609648262038768}
+  m_GameObject: {fileID: 6123127403536826723}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -85,13 +85,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1221739858614093175
+--- !u!65 &7947668832817866669
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7598609648262038768}
+  m_GameObject: {fileID: 6123127403536826723}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -106,21 +106,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-6272699666340784696
+--- !u!114 &6470348127225528789
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7598609648262038768}
+  m_GameObject: {fileID: 6123127403536826723}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb69ff9d502c37743887bda652ff57f9, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b17c6b7d83d27140824992ec6cb94ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   timeBeforeAct: 1.5
   isBeingObserved: 0
-  objectToDuplicate: {fileID: 0}
-  possibleSpawnPoints: []
-  maxCopies: 3
-  duplicateInterval: 2
+  lightsToControl:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  flickerSpeed: 10
