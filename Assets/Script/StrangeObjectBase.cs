@@ -7,17 +7,34 @@ public abstract class StrangeObjectBase : MonoBehaviour
     public float timeBeforeAct = 1.5f;
     public bool isBeingObserved = false;
 
+    [Header("Glow Settings")]
+    public Color observedColor = Color.white;
+    public Color unobservedColor = Color.red;
+    public float glowIntensity = 3f;
+
     protected Camera mainCamera;
     protected Renderer objectRenderer;
     protected float unobservedTimer = 0f;
     protected Material originalMaterial;
 
+    private Material objectMaterial;
+    private Light objectLight;
+
     public virtual void Start()
     {
         mainCamera = Camera.main;
         objectRenderer = GetComponent<Renderer>();
+
         if (objectRenderer != null)
+        {
             originalMaterial = objectRenderer.material;
+            objectMaterial = objectRenderer.material;
+
+            // Enable emission
+            objectMaterial.EnableKeyword("_EMISSION");
+        }
+
+        objectLight = GetComponentInChildren<Light>();
     }
 
     public virtual void Update()
@@ -46,6 +63,8 @@ public abstract class StrangeObjectBase : MonoBehaviour
 
     void CheckIfObserved()
     {
+        if (mainCamera == null) return;
+
         Vector3 viewportPoint = mainCamera.WorldToViewportPoint(transform.position);
         bool onScreen = viewportPoint.x > 0 && viewportPoint.x < 1 &&
                        viewportPoint.y > 0 && viewportPoint.y < 1 &&
@@ -67,6 +86,23 @@ public abstract class StrangeObjectBase : MonoBehaviour
         else
         {
             isBeingObserved = false;
+        }
+    }
+
+    // Glow methods (not override, just regular methods)
+    protected void SetGlow(Color color, float intensity)
+    {
+        if (objectMaterial != null)
+        {
+            // Set material emission
+            objectMaterial.SetColor("_EmissionColor", color * intensity);
+        }
+
+        // Update light if exists
+        if (objectLight != null)
+        {
+            objectLight.color = color;
+            objectLight.intensity = intensity * 0.5f;
         }
     }
 
