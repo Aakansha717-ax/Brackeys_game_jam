@@ -89,16 +89,14 @@ public abstract class StrangeObjectBase : MonoBehaviour
         }
     }
 
-    // Glow methods (not override, just regular methods)
+    // Glow methods
     protected void SetGlow(Color color, float intensity)
     {
         if (objectMaterial != null)
         {
-            // Set material emission
             objectMaterial.SetColor("_EmissionColor", color * intensity);
         }
 
-        // Update light if exists
         if (objectLight != null)
         {
             objectLight.color = color;
@@ -106,7 +104,7 @@ public abstract class StrangeObjectBase : MonoBehaviour
         }
     }
 
-    // Abstract methods for different behaviors
+    // Abstract methods
     protected abstract void OnObserved();
     protected abstract void OnUnobserved();
     protected abstract void OnWaiting();

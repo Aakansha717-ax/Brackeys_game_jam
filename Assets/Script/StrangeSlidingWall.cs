@@ -31,6 +31,7 @@ public class StrangeSlidingWall : StrangeObjectBase
 
     protected override void OnUnobserved()
     {
+
         // When unobserved, wall slides open
         targetPosition = openPosition.position;
         isMoving = true;
