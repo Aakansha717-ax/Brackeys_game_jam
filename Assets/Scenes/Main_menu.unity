@@ -131,6 +131,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 507573581}
+  - component: {fileID: 507573582}
   m_Layer: 0
   m_Name: 'AudioManager '
   m_TagString: Untagged
@@ -153,6 +154,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &507573582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507573580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83628d4dbbecf2647994f0d5fcbc8872, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicSource: {fileID: 0}
+  sfxSource: {fileID: 0}
+  mainMenuMusic: {fileID: 8300000, guid: 8dd9d871ee49b85418ac1459e654620f, type: 3}
+  gameMusic: {fileID: 8300000, guid: e14c8a741001d3f4c912a04b869fbeb9, type: 3}
+  creepyAmbience: {fileID: 8300000, guid: 9974d6b97d4e04f4da6478f9970c1fce, type: 3}
+  footstepSounds:
+  - {fileID: 8300000, guid: 85f9cddd01ec2254791baee4e5478013, type: 3}
+  objectMoveSound: {fileID: 0}
+  wallSlideSound: {fileID: 8300000, guid: 79b4a3b665ca08b40a753d64e2784eca, type: 3}
+  stalkerSound: {fileID: 8300000, guid: 9b15f05bfa7b37346bc92802abec273b, type: 3}
 --- !u!1 &791271344
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,6 +189,7 @@ GameObject:
   - component: {fileID: 791271346}
   - component: {fileID: 791271345}
   - component: {fileID: 791271349}
+  - component: {fileID: 791271350}
   m_Layer: 0
   m_Name: Decorative
   m_TagString: Untagged
@@ -280,6 +304,18 @@ MonoBehaviour:
   colorChangeSpeed: 3
   menuButtons: []
   menuTexts: []
+--- !u!114 &791271350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 791271344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b420bff7d108964993ae51e2afa735d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1098210616
 GameObject:
   m_ObjectHideFlags: 0
@@ -1193,7 +1229,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
+  m_TextStyleHashCode: 93368250
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -1205,8 +1241,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 2
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -1298,7 +1334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 1579272617}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &2075536667
