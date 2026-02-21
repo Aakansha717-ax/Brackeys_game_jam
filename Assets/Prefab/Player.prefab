@@ -164,7 +164,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1886998654224242193}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!82 &1278321838714518075
 AudioSource:
   m_ObjectHideFlags: 0
@@ -381,11 +381,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   instructionText: {fileID: 2318819156525525218}
-  instructions:
-  - Look away... things change...
-  - The stalker follows when you're not watching
-  - Find the hidden passages
-  - Reach the exit
+  sceneMessages:
+  - sceneName: Room_1
+    messages:
+    - Look away... things change...
+    - Objects move when you're not watching
+    - Something follows in the darkness
+    sceneGlowColor: {r: 0, g: 1, b: 1, a: 0}
+  - sceneName: Room_2
+    messages:
+    - The stalker is getting closer...
+    - Find the exit before it's too late
+    - Look away to reveal hidden paths
+    - 3 hits and it's over...
+    sceneGlowColor: {r: 1, g: 0, b: 0, a: 0}
   displayTime: 4
   fadeSpeed: 5
   startDelay: 2

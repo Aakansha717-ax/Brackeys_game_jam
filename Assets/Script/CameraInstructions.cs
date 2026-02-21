@@ -1,21 +1,15 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class CameraInstructions : MonoBehaviour
 {
     [Header("Instruction Text")]
     public TextMeshProUGUI instructionText;
 
-    [Header("Messages")]
-    [TextArea(2, 3)]
-    public string[] instructions = new string[]
-    {
-        "Look away... things change...",
-        "The stalker follows when you're not watching",
-        "Find the hidden passages",
-        "Reach the exit"
-    };
+    [Header("Scene-Specific Messages")]
+    public MessageSet[] sceneMessages;
 
     [Header("Settings")]
     public float displayTime = 4f;
@@ -25,18 +19,33 @@ public class CameraInstructions : MonoBehaviour
     [Header("Glow Effects")]
     public Color textColor = Color.white;
     public Color glowColor = Color.cyan;
-    public float glowIntensity = 0.5f;  // Reduced for better look
+    public float glowIntensity = 0.5f;
     public float pulseSpeed = 2f;
     public float outlineWidth = 0.2f;
     public Color outlineColor = Color.black;
+
+    [System.Serializable]
+    public class MessageSet
+    {
+        public string sceneName;           // Which scene these messages are for
+        [TextArea(2, 3)]
+        public string[] messages;          // Messages for that scene
+        public Color sceneGlowColor = Color.cyan;  // Optional: different glow per scene
+    }
 
     private int currentIndex = 0;
     private CanvasGroup canvasGroup;
     private Material textMaterial;
     private float originalGlow;
+    private string currentScene;
+    private string[] activeMessages;
 
     void Start()
     {
+        // Get current scene name
+        currentScene = SceneManager.GetActiveScene().name;
+        Debug.Log($"CameraInstructions starting in scene: {currentScene}");
+
         // Get or add CanvasGroup
         canvasGroup = instructionText.GetComponent<CanvasGroup>();
         if (canvasGroup == null)
@@ -47,14 +56,53 @@ public class CameraInstructions : MonoBehaviour
         instructionText.outlineWidth = outlineWidth;
         instructionText.outlineColor = outlineColor;
 
+        // Load messages for this scene
+        LoadMessagesForCurrentScene();
+
         // Setup glow through material
         SetupGlowMaterial();
 
         // Start hidden
         canvasGroup.alpha = 0f;
 
-        // Start instruction sequence
-        StartCoroutine(InstructionSequence());
+        // Start instruction sequence if there are messages
+        if (activeMessages != null && activeMessages.Length > 0)
+        {
+            StartCoroutine(InstructionSequence());
+        }
+        else
+        {
+            Debug.LogWarning($"No messages found for scene: {currentScene}");
+        }
+    }
+
+    void LoadMessagesForCurrentScene()
+    {
+        // Find messages for current scene
+        foreach (MessageSet set in sceneMessages)
+        {
+            if (set.sceneName == currentScene)
+            {
+                activeMessages = set.messages;
+                if (set.sceneGlowColor != glowColor)
+                {
+                    glowColor = set.sceneGlowColor; // Use scene-specific glow
+                }
+                Debug.Log($"Loaded {activeMessages.Length} messages for {currentScene}");
+                return;
+            }
+        }
+
+        // If no scene-specific messages found, try to use first set as default
+        if (sceneMessages.Length > 0)
+        {
+            activeMessages = sceneMessages[0].messages;
+            Debug.Log($"No specific messages for {currentScene}, using default");
+        }
+        else
+        {
+            Debug.LogError("No message sets configured in Inspector!");
+        }
     }
 
     void SetupGlowMaterial()
@@ -64,17 +112,13 @@ public class CameraInstructions : MonoBehaviour
 
         if (textMaterial != null)
         {
-            // Different shaders use different property names
             // Try common glow property names
-
-            // For Standard shader
             if (textMaterial.HasProperty("_GlowPower"))
             {
                 textMaterial.SetFloat("_GlowPower", glowIntensity);
                 originalGlow = glowIntensity;
             }
 
-            // For TextMeshPro shader
             if (textMaterial.HasProperty("_Glow"))
             {
                 textMaterial.EnableKeyword("GLOW_ON");
@@ -82,14 +126,12 @@ public class CameraInstructions : MonoBehaviour
                 originalGlow = glowIntensity;
             }
 
-            // For Face/Outline glow
             if (textMaterial.HasProperty("_OutlineGlow"))
             {
                 textMaterial.SetFloat("_OutlineGlow", glowIntensity);
                 originalGlow = glowIntensity;
             }
 
-            // Set glow color if property exists
             if (textMaterial.HasProperty("_GlowColor"))
             {
                 textMaterial.SetColor("_GlowColor", glowColor);
@@ -106,7 +148,6 @@ public class CameraInstructions : MonoBehaviour
 
     void CreateGlowMaterial()
     {
-        // Create a new material for glow
         textMaterial = new Material(Shader.Find("TextMeshPro/Distance Field"));
         instructionText.fontMaterial = textMaterial;
 
@@ -126,7 +167,6 @@ public class CameraInstructions : MonoBehaviour
             float pulse = Mathf.Sin(Time.time * pulseSpeed) * 0.2f + 0.8f;
             float pulsedGlow = originalGlow * pulse;
 
-            // Apply to various possible properties
             if (textMaterial.HasProperty("_GlowPower"))
                 textMaterial.SetFloat("_GlowPower", pulsedGlow);
 
@@ -144,10 +184,9 @@ public class CameraInstructions : MonoBehaviour
         yield return new WaitForSeconds(startDelay);
 
         // Show each instruction
-        while (currentIndex < instructions.Length)
+        while (currentIndex < activeMessages.Length)
         {
-            // Set text
-            instructionText.text = instructions[currentIndex];
+            instructionText.text = activeMessages[currentIndex];
 
             // Fade in
             yield return StartCoroutine(Fade(0f, 1f));
@@ -158,14 +197,10 @@ public class CameraInstructions : MonoBehaviour
             // Fade out
             yield return StartCoroutine(Fade(1f, 0f));
 
-            // Next instruction
             currentIndex++;
-
-            // Small pause between
             yield return new WaitForSeconds(0.5f);
         }
 
-        // All done - hide permanently
         canvasGroup.alpha = 0f;
     }
 
